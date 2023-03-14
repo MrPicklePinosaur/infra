@@ -1,0 +1,5 @@
+---
+# The setup task installs and configures necessary software for the host system
+- import_tasks: basic.yml
+
+

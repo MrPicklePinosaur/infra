@@ -1,0 +1,10 @@
+---
+# Basic machine configuration
+- name: install basic packages
+  apt:
+    update_cache: yes
+    state: present
+    pkg:
+      - git
+      - python3-pip
+      - vim

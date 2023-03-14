@@ -1,0 +1,6 @@
+[website]
+<host>
+
+[website:vars]
+ansible_connection=ssh
+ansible_port=22
