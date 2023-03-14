@@ -1,0 +1,46 @@
+---
+- name: install pip dependencies
+  pip:
+    name:
+      - docker
+      - docker-compose
+
+- name: install docker dependencies
+  become: yes
+  apt:
+    update-cache: yes
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg2
+      - software-properties-common 
+- name: add gpg key for docker repo
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+- name: add to apt sources
+  become: yes
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian bullseye stable
+    state: present
+- name: install docker
+  become: yes
+  apt:
+    name: docker-ce
+    update_cache: yes
+    install_recommends: no
+    state: present
+- name: add dev user to docker group
+  become: yes
+  user:
+    name: "{{ansible_env.USER}}"
+    groups: docker
+    append: yes
+- name: start and enable docker service
+  become: yes
+  systemd:
+    name: docker
+    state: started
+    enabled: yes

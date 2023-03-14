@@ -1,0 +1,13 @@
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+AuthorizedKeysFile .ssh/authorized_keys
+
+PermitRootLogin yes # keep this as safety for now
+PasswordAuthentication no
+ChallengeResponseAuthentication yes # keep this as safety for now
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials no
+
+X11Forwarding no

@@ -1,6 +1,7 @@
 ---
 # Basic machine configuration
 - name: install basic packages
+  become: yes
   apt:
     update_cache: yes
     state: present
