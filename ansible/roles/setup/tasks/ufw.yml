@@ -1,0 +1,70 @@
+---
+- name: install ufw
+  become: yes
+  apt:
+    update-cache: yes
+    state: present
+    install_recommends: no
+
+- name: start ufw
+  become: yes
+  ufw:
+    state: enabled
+- name: enable ufw
+  become: yes
+  ufw:
+    state: enabled
+    policy: deny
+
+# set basic ufw rules
+- become: yes
+  ufw:
+    rule: allow
+    name: OpenSSH
+- become: yes
+  ufw:
+    rule: allow
+    port: 80
+- become: yes
+  ufw:
+    rule: allow
+    port: 443
+
+# kubernetes
+- become: yes
+  ufw:
+    comment: kubernetes API server
+    rule: allow
+    port: 6443
+    proto: tcp
+- become: yes
+  ufw:
+    comment: etcd server client API
+    rule: allow
+    port: 2379:2380
+    proto: tcp
+- become: yes
+  ufw:
+    comment: kubelet API
+    rule: allow
+    port: 10250
+    proto: tcp
+- become: yes
+  ufw:
+    comment: kube-scheduler
+    rule: allow
+    port: 10259
+    proto: tcp
+- become: yes
+  ufw:
+    comment: kube-controller-manager
+    rule: allow
+    port: 10257
+    proto: tcp
+
+- name: enable ufw service
+  become: yes
+  systemd:
+    name: ufw
+    state: started
+    enabled: yes

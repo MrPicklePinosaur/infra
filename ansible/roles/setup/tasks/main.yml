@@ -1,7 +1,11 @@
 ---
 # The setup task installs and configures necessary software for the host system
-- import_tasks: basic.yml
-- import_tasks: sshd.yml
-- import_tasks: docker.yml
+# - import_tasks: prereq.yml
+# - import_tasks: basic.yml
+# - import_tasks: docker.yml
+# - import_tasks: ufw.yml
+# - import_tasks: sshd.yml
+# - import_tasks: docker.yml
+# - import_tasks: kubernetes.yml
 
 

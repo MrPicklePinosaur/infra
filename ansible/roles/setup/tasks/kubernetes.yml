@@ -1,0 +1,35 @@
+---
+# TODO run these checks https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/ before starting node
+- name: install kubernetes dependencies
+  become: yes
+  apt:
+    update-cache: yes
+    install_recommends: no
+    state: present
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+- name: add gpg key for kubernetes repo
+  become: yes
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+- name: add to apt sources
+  become: yes
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+- name: install kubernetes packages
+  become: yes
+  apt:
+    update_cache: yes
+    install_recommends: no
+    state: present
+    pkg:
+      - kubelet
+      - kubeadm
+      - kubectl
+
+# kubeadm init --pod-network-cidr=10.244.0.0/16
+# can run `kubeadm reset` in case the init fails and you wish to re-run init

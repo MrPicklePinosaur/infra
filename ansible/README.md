@@ -1,4 +1,10 @@
 
+Set up a single node kubernetes cluster with flannel.
+
+## REQUIREMENTS
+
+Host machine should run debian 11 with more than 2 vCPU and 2mB RAM
+
 ## SETTING UP FOR DEVELOPMENT
 
 Copy the example `hosts.example` file and fill out necessary fields
@@ -28,3 +34,5 @@ ansible-playbook --ask-become-pass website.yml
 - [ansible playbook best practices](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html)
 - [ansible hardening](https://www.redhat.com/sysadmin/harden-new-system-ansible)
 
+- [Kubernetes Setup](https://www.redpill-linpro.com/techblog/2019/04/04/kubernetes-setup.html)
+- [Kuberentes on Ubuntu](https://www.fosstechnix.com/how-to-install-kubernetes-cluster-on-ubuntu/)

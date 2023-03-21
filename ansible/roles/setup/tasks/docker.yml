@@ -9,6 +9,7 @@
   become: yes
   apt:
     update-cache: yes
+    state: present
     pkg:
       - apt-transport-https
       - ca-certificates
@@ -28,19 +29,44 @@
 - name: install docker
   become: yes
   apt:
-    name: docker-ce
     update_cache: yes
     install_recommends: no
     state: present
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
 - name: add dev user to docker group
   become: yes
   user:
     name: "{{ansible_env.USER}}"
     groups: docker
     append: yes
+- name: copy /etc/docker/daemon.json
+  become: yes
+  copy:
+    dest: /etc/docker/daemon.json
+    src: etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0600
+- name: copy /etc/containerd/config.toml
+  become: yes
+  copy:
+    dest: /etc/containerd/config.toml
+    src: etc/containerd/config.toml
+    owner: root
+    group: root
+    mode: 0644
 - name: start and enable docker service
   become: yes
   systemd:
     name: docker
+    state: started
+    enabled: yes
+- name: start and enable docker service
+  become: yes
+  systemd:
+    name: containerd
     state: started
     enabled: yes

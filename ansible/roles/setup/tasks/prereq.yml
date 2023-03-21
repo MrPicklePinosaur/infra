@@ -1,0 +1,14 @@
+---
+# disable swap for kubernetes
+- name: Disable SWAP (1/2)
+  become: yes
+  shell: |
+    swapoff -a
+- name: Disable SWAP in fstab (2/2)
+  become: yes
+  replace:
+    path: /etc/fstab
+    regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+    replace: '# \1'
+
+# REQUIRES REBOOT AFTER THIS
