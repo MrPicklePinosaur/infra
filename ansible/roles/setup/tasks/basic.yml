@@ -9,3 +9,7 @@
       - git
       - python3-pip
       - vim
+- name: copy bashrc
+  copy:
+    dest: .bashrc
+    src: home/.bashrc

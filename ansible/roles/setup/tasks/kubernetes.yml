@@ -31,5 +31,28 @@
       - kubeadm
       - kubectl
 
-# kubeadm init --pod-network-cidr=10.244.0.0/16
+# sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --v 5
 # can run `kubeadm reset` in case the init fails and you wish to re-run init
+
+- name: ensure $HOME/.kube exists
+  file:
+    path: .kube
+    state: directory
+- name: copy /etc/kubernetes/admin.conf to $HOME/.kube/config
+  become: yes
+  copy:
+    remote_src: true
+    src: /etc/kubernetes/admin.conf
+    dest: .kube/config
+
+- name: start and enable kubectl service
+  become: yes
+  systemd:
+    name: kubectl
+    state: started
+    enabled: yes
+
+# setting up flannel
+# kubectl apply -f kube-flannel.yaml
+# kubectl taint nodes --all node-role.kubernetes.io/master-
+

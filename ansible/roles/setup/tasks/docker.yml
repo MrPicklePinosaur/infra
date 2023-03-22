@@ -64,7 +64,7 @@
     name: docker
     state: started
     enabled: yes
-- name: start and enable docker service
+- name: start and enable containerd service
   become: yes
   systemd:
     name: containerd
