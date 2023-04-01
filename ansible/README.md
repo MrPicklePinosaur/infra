@@ -36,3 +36,4 @@ ansible-playbook --ask-become-pass website.yml
 
 - [Kubernetes Setup](https://www.redpill-linpro.com/techblog/2019/04/04/kubernetes-setup.html)
 - [Kuberentes on Ubuntu](https://www.fosstechnix.com/how-to-install-kubernetes-cluster-on-ubuntu/)
+- [Install kubernetes cluster on debian](https://www.linuxtechi.com/install-kubernetes-cluster-on-debian/)
