@@ -25,9 +25,18 @@ spec:
         - containerPort: 80
         volumeMounts:
           - mountPath: /usr/share/nginx/html
-            subPath: html
             name: homepage-volume
+      initContainers:
+      - image: alpine/git
+        name: git
+        command:
+        - git
+        - clone
+        - https://github.com/MrPicklePinosaur/danieliu.xyz
+        - /html
+        volumeMounts:
+        - name: homepage-volume
+          mountPath: /html
       volumes:
         - name: homepage-volume
-          gitRepo:
-            repository: https://github.com/MrPicklePinosaur/danieliu.xyz
+          emptyDir: {}

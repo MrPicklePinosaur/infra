@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: homepage-ingress
 spec:
-  ingressClassName: nginx-example
+  ingressClassName: nginx
   rules:
   - host: home.danieliu.xyz
     http:
