@@ -1,0 +1,33 @@
+---
+# from https://abdennoor.medium.com/easly-continuously-deploy-static-website-to-kubernetes-without-customer-docker-images-f81ab83a180d
+# TODO gitRepo volume is deprecated, see https://github.com/kubernetes/kubernetes/issues/60999
+# can potentially look at init containers as alternative
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homepage-deployment
+  labels:
+    app:
+      homepage
+spec:
+  selector:
+    matchLabels:
+      app: homepage
+  template:
+    metadata:
+      labels:
+        app: homepage
+    spec:
+      containers:
+      - name: homepage
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: /usr/share/nginx/html
+            subPath: html
+            name: homepage-volume
+      volumes:
+        - name: homepage-volume
+          gitRepo:
+            repository: https://github.com/MrPicklePinosaur/danieliu.xyz
