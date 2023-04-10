@@ -16,3 +16,7 @@ spec:
             name: homepage-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - home.danieliu.xyz
+    secretName: homepage-ssl-secret
